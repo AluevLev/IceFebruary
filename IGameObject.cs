@@ -8,6 +8,6 @@ namespace IceFebruary
         ITransform Transform { get; }
         int Layer { get; set; }
         IBaseEntity MainComponent { get; set; }
-        IRootConfig GetRootConfig();
+        bool TryGetRootConfig<T>(out T rootConfig) where T : class;
     }
 }

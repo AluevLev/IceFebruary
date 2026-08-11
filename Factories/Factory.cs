@@ -3,24 +3,28 @@ namespace IceFebruary.Factories
     using IceFebruary;
     using IceFebruary.Space;
 
-    public sealed class Factory<TSettableUp, TConfig> : BaseEntity, IObjectManager where TSettableUp : ISettableUp<TConfig>
+    public sealed class Factory<TSettableUp, TConfig> : BaseEntity, IObjectManager where TSettableUp : ISettableUp<TConfig> where TConfig : class
     {
         private readonly IObjectManager _objectManager;
-        private readonly TSettableUp _builderFactory;
-        public Factory(IObjectManager objectManager, TSettableUp builderFactory)
+        private readonly TSettableUp _factory;
+        public Factory(IObjectManager objectManager, TSettableUp factory)
         {
             _objectManager = objectManager;
-            _builderFactory = builderFactory;
+            _factory = factory;
         }
         public IGameObject Create(IGameObject prefab, Vector2 position, Rotor2 rotation)
         {
-            IGameObject created = _objectManager.Create(prefab, position, rotation);
-            IRootConfig rootConfig = created.GetRootConfig();
-
-            if (rootConfig == null || rootConfig is not TConfig config)
+            if (_factory == null ||
+                !prefab.Exists() ||
+                !_objectManager.Exists())
                 return null;
 
-            _builderFactory.SetUp(config);
+            IGameObject created = _objectManager.Create(prefab, position, rotation);
+
+            if (!created.TryGetRootConfig(out TConfig rootConfig))
+                return null;
+
+            _factory.SetUp(rootConfig);
 
             return created;
         }

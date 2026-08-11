@@ -5,13 +5,13 @@ namespace IceFebruary.Time
         private readonly ITime _time;
         private readonly float _cooldown;
         private float _endTime;
-        public bool InCoolDown => _endTime > _time.CurrentTime;
+        public bool InCoolDown => _time.Exists() && _endTime > _time.CurrentTime;
         public Timer(ITime time, float cooldown)
         {
             _time = time;
             _cooldown = cooldown;
         }
-        public void SetCooldown() => _endTime = _time.CurrentTime + _cooldown;
+        public void SetCooldown() => _endTime = _time.Exists() ? (_time.CurrentTime + _cooldown) : -1f;
         public void ResetCooldown() => _endTime = -1f;
     }
 }

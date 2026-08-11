@@ -26,7 +26,10 @@ namespace IceFebruary.Physics.Balancer
         public void ResetTarget() => _targetAngle = _defaultAngleProvider;
         public void OnFixedFrame()
         {
-            if (!_targetAngle.TryGetSafety(out Rotor2 angle))
+            if (!Enabled ||
+                !_physicsBody.Exists() ||
+                _physicsBalancerCalculator == null ||
+                !_targetAngle.TryGetSafety(out Rotor2 angle))
                 return;
 
             Rotor2 rotation = _physicsBalancerCalculator.CalculateAngle(_physicsBody.Rotation, angle);

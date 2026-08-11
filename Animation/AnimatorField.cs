@@ -9,8 +9,18 @@ namespace IceFebruary.Animation
         }
         public T Value
         {
-            get => _animatorFieldData.Animator.Get<T>(_animatorFieldData.Hash);
-            set => _animatorFieldData.Animator.Set(_animatorFieldData.Hash, value);
+            get
+            {
+                IAnimator animator = _animatorFieldData.Animator;
+                return animator.Exists() ? animator.Get<T>(_animatorFieldData.Hash) : default;
+            }
+
+            set
+            {
+                IAnimator animator = _animatorFieldData.Animator;
+                if (animator.Exists())
+                    animator.Set(_animatorFieldData.Hash, value);
+            }
         }
     }
 }

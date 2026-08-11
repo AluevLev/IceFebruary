@@ -6,7 +6,5 @@ namespace IceFebruary
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Exists(this IBaseEntity entity) => !(entity == null || entity.Destroyed);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Active(this IBaseEntity entity) => entity.Exists() && entity.Enabled;
     }
 }

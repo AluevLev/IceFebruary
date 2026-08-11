@@ -18,7 +18,7 @@ namespace IceFebruary.Space.Vector2Provider
         }
         public bool TryGet(out Vector2 point)
         {
-            if (_mainCamera.Active() && _vector2.TryGetSafety(out Vector2 vector2))
+            if (_mainCamera.Exists() && _vector2.TryGetSafety(out Vector2 vector2))
             {
                 point = _mainCamera.ScreenToWorldPoint(vector2);
                 return true;

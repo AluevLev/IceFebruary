@@ -9,7 +9,7 @@ namespace IceFebruary
         public void Charge() => _charged = true;
         public void OnFixedFrame()
         {
-            Active = _charged;
+            Active = _charged && Enabled;
             _charged = false;
         }
         public Trigger() { }
