@@ -3,7 +3,7 @@ namespace IceFebruary.Space
     using IceFebruary.Proxy;
     using System.Runtime.CompilerServices;
 
-    public readonly struct Rotor2 : System.IEquatable<Rotor2>
+    public readonly struct Rotor2 : System.IEquatable<Rotor2>, System.IFormattable
     {
         public static readonly Rotor2 Default = new(1f, 0f);
         public float Scalar { get; private init; }
@@ -46,7 +46,6 @@ namespace IceFebruary.Space
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rotor2 operator *(Rotor2 a, Rotor2 b) => new(a.Scalar * b.Scalar - a.XY * b.XY, a.Scalar * b.XY + a.XY * b.Scalar);
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator *(Rotor2 r, Vector2 v)
         {
             float cos2A = r.Scalar * r.Scalar - r.XY * r.XY;
@@ -54,8 +53,7 @@ namespace IceFebruary.Space
 
             return new(
                 v.X * cos2A - v.Y * sin2A,
-                v.X * sin2A + v.Y * cos2A
-            );
+                v.X * sin2A + v.Y * cos2A);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Rotor2 a, Rotor2 b) =>
@@ -68,7 +66,11 @@ namespace IceFebruary.Space
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Rotor2 other && Equals(other);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => System.HashCode.Combine(Scalar, XY);
+        public string ToString(string format, System.IFormatProvider formatProvider) => $"(Scalar: {Scalar}; XY: {XY})";
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override string ToString() => ToString(null, null);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override int GetHashCode() => System.HashCode.Combine((int)(Scalar * Math.InverseEpsilon), (int)(XY * Math.InverseEpsilon));
         public static Rotor2 Lerp(Rotor2 a, Rotor2 b, float interpolation)
         {
             interpolation = interpolation.Clamp01();

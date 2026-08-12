@@ -1,9 +1,10 @@
 namespace IceFebruary.Space
 {
+    using IceFebruary;
     using IceFebruary.Proxy;
     using System.Runtime.CompilerServices;
 
-    public readonly struct Vector2 : System.IEquatable<Vector2>
+    public readonly struct Vector2 : System.IEquatable<Vector2>, System.IFormattable
     {
         public static readonly Vector2 Zero = default;
         public static readonly Vector2 TopRight = new(1f, 1f);
@@ -37,11 +38,6 @@ namespace IceFebruary.Space
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => Normalize(this);
         }
-        public Vector2 BoxClamped
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => BoxClamp(this);
-        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2 DirectionTo(Vector2 to) => DirectionTo(this, to);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -69,7 +65,11 @@ namespace IceFebruary.Space
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Vector2 other && Equals(other);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode() => System.HashCode.Combine(X, Y);
+        public string ToString(string format, System.IFormatProvider formatProvider) => $"(X: {X}; Y: {Y})";
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override string ToString() => ToString(null, null);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override int GetHashCode() => System.HashCode.Combine((int)(X * Math.InverseEpsilon), (int)(Y * Math.InverseEpsilon));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector2 a, Vector2 b) => a.X * b.X + a.Y * b.Y;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -82,10 +82,6 @@ namespace IceFebruary.Space
             float length = v.Length;
             return length < Math.Epsilon ? Right : v / length;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 BoxClamp(Vector2 v) => new(
-            v.X.ClampNeg11(),
-            v.Y.ClampNeg11());
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, float t) => a + (b - a) * t.Clamp01();
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

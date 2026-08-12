@@ -15,9 +15,9 @@ namespace IceFebruary.Factories
         }
         public TBuilder Create(IGameObject prefab, Vector2 position, Rotor2 rotation)
         {
-            if (_builderFactory == null || 
-                !prefab.Exists() || 
-                !_objectManager.Exists() || 
+            if (_builderFactory == null ||
+                !prefab.Exists() ||
+                !_objectManager.Exists() ||
                 !_objectManager.Create(prefab, position, rotation).TryGetRootConfig(out TConfig rootConfig))
                 return default;
 
