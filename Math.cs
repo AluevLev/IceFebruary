@@ -9,17 +9,17 @@ namespace IceFebruary
     public static class Math
     {
         /// <summary>
-        /// The number pi = 3.14159274.
+        /// Number pi = 3.14159274.
         /// </summary>
         public const float Pi = 3.14159274f;
 
         /// <summary>
-        /// The number epsilon = 0.00001.
+        /// Number epsilon = 0.00001.
         /// </summary>
         public const float Epsilon = 0.00001f;
 
         /// <summary>
-        /// The number inverse epsilon = 1 / 0.00001.
+        /// Number inverse epsilon = 1 / 0.00001.
         /// </summary>
         public const float InverseEpsilon = 1f / Epsilon;
 

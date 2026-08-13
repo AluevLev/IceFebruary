@@ -11,7 +11,8 @@ namespace IceFebruary
         bool Enabled { get; set; }
 
         /// <summary>
-        /// True, if the entity is destroyed. Don't use destroyed entities.
+        /// True, if the entity is destroyed.
+        /// Don't use destroyed entities.
         /// </summary>
         bool Destroyed { get; }
 

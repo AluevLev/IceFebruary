@@ -15,12 +15,12 @@ namespace IceFebruary
         }
 
         /// <summary>
-        /// The structure component itself.
+        /// Structure component itself.
         /// </summary>
         public T Value { get; private init; }
 
         /// <summary>
-        /// The game object to which the component is called.
+        /// Game object to which the component is called.
         /// </summary>
         public IGameObject GameObject { get; private init; }
     }

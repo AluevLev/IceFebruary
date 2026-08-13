@@ -3,7 +3,7 @@ namespace IceFebruary.Animation
     using IceFebruary.Proxy;
 
     /// <summary>
-    /// The immutable structure for storing information about a variable in an animator.
+    /// Immutable structure for storing information about a variable in an animator.
     /// </summary>
     public readonly struct AnimatorFieldData
     {

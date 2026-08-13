@@ -1,14 +1,16 @@
 namespace IceFebruary
 {
     /// <summary>
-    /// Basic implementation of the entity interface.
+    /// Basic abstract entity class.
+    /// Simplest implementation of the entity interface.
     /// </summary>
     public abstract class BaseEntity : IBaseEntity
     {
         protected bool _enabled = true;
 
         /// <summary>
-        /// True, if the entity is destroyed. Don't use destroyed entities.
+        /// True, if the entity is destroyed.
+        /// Don't use destroyed entities.
         /// </summary>
         public bool Destroyed { get; protected set; } = false;
 

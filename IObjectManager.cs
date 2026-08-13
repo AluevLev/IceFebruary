@@ -8,7 +8,7 @@ namespace IceFebruary
     public interface IObjectManager : IBaseEntity
     {
         /// <summary>
-        /// Creating a game object.
+        /// Create a game object.
         /// </summary>
         IGameObject Create(IGameObject gameObject, Vector2 position, Rotor2 rotation);
     }

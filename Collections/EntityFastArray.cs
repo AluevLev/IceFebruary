@@ -3,7 +3,7 @@ namespace IceFebruary.Collections
     using System.Collections.Generic;
 
     /// <summary>
-    /// The high-performance collection for efficiently storing <see cref="IBaseEntity"/> types.
+    /// High-performance collection for efficiently storing <see cref="IBaseEntity"/> types.
     /// Automatically recycles slots of deleted entities and doubles its capacity on overflow.
     /// </summary>
     public sealed class EntityFastArray<T> where T : class, IBaseEntity

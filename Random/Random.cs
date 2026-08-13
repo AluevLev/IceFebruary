@@ -13,7 +13,7 @@ namespace IceFebruary.Random
         private uint _state;
 
         /// <summary>
-        /// The state of the random value generator that generates random values.
+        /// State of the random value generator that generates random values.
         /// </summary>
         public uint State
         {

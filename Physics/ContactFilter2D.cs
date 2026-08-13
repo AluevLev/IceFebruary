@@ -15,7 +15,7 @@ namespace IceFebruary.Physics
         public bool UseTriggers { get; private init; }
 
         /// <summary>
-        /// A mask with the layers that the filter will include.
+        /// Mask with the layers that the filter will include.
         /// </summary>
         public LayerMask LayerMask { get; private init; }
 

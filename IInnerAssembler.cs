@@ -3,7 +3,7 @@ namespace IceFebruary
     using IceFebruary.Time;
 
     /// <summary>
-    /// Interface that represents the functions of the assembler part.
+    /// Interface that represents the functions of the game assembler poco part.
     /// </summary>
     public interface IInnerAssembler
     {

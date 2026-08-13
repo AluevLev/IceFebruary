@@ -101,7 +101,7 @@ namespace IceFebruary.Space
 
         /// <summary>
         /// Performs linear interpolation between two rotors.
-        /// The value of the coefficient <paramref name="interpolation"/> is automatically clamped between 0 and 1.
+        /// Value of the coefficient <paramref name="interpolation"/> is automatically clamped between 0 and 1.
         /// </summary>
         public static Rotor2 Lerp(Rotor2 a, Rotor2 b, float interpolation)
         {

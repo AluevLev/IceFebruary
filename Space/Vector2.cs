@@ -175,7 +175,7 @@ namespace IceFebruary.Space
 
         /// <summary>
         /// Linear interpolation between two vectors.
-        /// The value of the coefficient <paramref name="interpolation"/> is automatically clamped between 0 and 1.
+        /// Value of the coefficient <paramref name="interpolation"/> is automatically clamped between 0 and 1.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, float interpolation) => a + (b - a) * interpolation.Clamp01();

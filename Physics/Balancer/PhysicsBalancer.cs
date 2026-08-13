@@ -7,7 +7,7 @@ namespace IceFebruary.Physics.Balancer
     using IceFebruary.Time;
 
     /// <summary>
-    /// A physics balancer that stabilizes and maintains a given angle of rotation of a rigidbody.
+    /// Physics balancer that stabilizes and maintains a given angle of rotation of a rigidbody.
     /// </summary>
     public sealed class PhysicsBalancer : BaseEntity, ITargetPossessing<IRotor2Provider>, IFixedFrame
     {
@@ -40,7 +40,7 @@ namespace IceFebruary.Physics.Balancer
         public void ResetTarget() => _targetAngle = _defaultAngleProvider;
 
         /// <summary>
-        /// A physics frame method that calculates and applies rotation to a body.
+        /// Physics frame method that calculates and applies rotation to a body.
         /// </summary>
         public void OnFixedFrame()
         {
