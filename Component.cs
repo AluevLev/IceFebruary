@@ -1,15 +1,27 @@
 namespace IceFebruary
 {
+    /// <summary>
+    /// Immutable structure that represents a link between a component and the game object it is attached to.
+    /// </summary>
     public readonly struct Component<T> where T : class, IBaseEntity
     {
+        /// <summary>
+        /// Creates a new structure that represents a link between a component and the game object it is attached to.
+        /// </summary>
         public Component(T component, IGameObject gameObject)
         {
             Value = component;
             GameObject = gameObject;
-            Transform = gameObject.Transform;
         }
+
+        /// <summary>
+        /// The structure component itself.
+        /// </summary>
         public T Value { get; private init; }
+
+        /// <summary>
+        /// The game object to which the component is called.
+        /// </summary>
         public IGameObject GameObject { get; private init; }
-        public ITransform Transform { get; private init; }
     }
 }

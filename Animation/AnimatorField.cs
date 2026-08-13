@@ -1,12 +1,23 @@
 namespace IceFebruary.Animation
 {
+    /// <summary>
+    /// Immutable structure of animator field.
+    /// </summary>
     public readonly struct AnimatorField<T> where T : struct
     {
-        public readonly AnimatorFieldData _animatorFieldData;
+        private readonly AnimatorFieldData _animatorFieldData;
+
+        /// <summary>
+        /// Creates a new animator field with the given animator field data.
+        /// </summary>
         public AnimatorField(AnimatorFieldData animatorFieldData)
         {
             _animatorFieldData = animatorFieldData;
         }
+
+        /// <summary>
+        /// Value of the variable in the animator.
+        /// </summary>
         public T Value
         {
             get

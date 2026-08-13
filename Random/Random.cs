@@ -2,20 +2,68 @@ namespace IceFebruary.Random
 {
     using IceFebruary.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
+    /// <summary>
+    /// Сlass that generates random values.
+    /// </summary>
     public sealed class Random
     {
         private const float UintFloatMaxValue = uint.MaxValue;
         private uint _state;
+
+        /// <summary>
+        /// The state of the random value generator that generates random values.
+        /// </summary>
         public uint State
         {
             get => _state;
             set => _state = value;
         }
+
+        /// <summary>
+        /// Creates a new class that generates random values.
+        /// </summary>
         public Random(uint state)
         {
             _state = state == 0 ? 1 : state;
         }
+
+        /// <summary>
+        /// Generates a random integer between two values (minimum including and maximum excluding).
+        /// </summary>
+        public int BetweenInt(int min, int max)
+        {
+            FixOrder(ref min, ref max);
+
+            return min + (int)RandomUnum((uint)(max - min));
+        }
+
+        /// <summary>
+        /// Generates a random float between two values.
+        /// </summary>
+        public float BetweenFloat(float min, float max)
+        {
+            FixOrder(ref min, ref max);
+
+            return RandomFloat01() * (max - min) + min;
+        }
+
+        /// <summary>
+        /// Generates a random boolean.
+        /// </summary>
+        public bool FiftyFifty => (ChangeState() & 1) == 0;
+
+        /// <summary>
+        /// Generates a random float between 0 and 1.
+        /// </summary>
+        public float Percent => BetweenFloat(0f, 1f);
+
+        /// <summary>
+        /// Returns a random element of the collection.
+        /// </summary>
+        public T InCollection<T>(IReadOnlyCollection<T> collection) => collection.Exists() ? collection.ElementAt(BetweenInt(0, collection.Count)) : default;
+
         private uint ChangeState()
         {
             _state ^= _state << 13;
@@ -36,21 +84,5 @@ namespace IceFebruary.Random
             if (min > max)
                 (min, max) = (max, min);
         }
-        public int BetweenInt(int min, int max)
-        {
-            FixOrder(ref min, ref max);
-
-            return min + (int)RandomUnum((uint)(max - min));
-        }
-        public float BetweenFloat(float min, float max)
-        {
-            FixOrder(ref min, ref max);
-
-            return RandomFloat01() * (max - min) + min;
-        }
-        public bool FiftyFifty => (ChangeState() & 1) == 0;
-        public float Percent => BetweenFloat(0f, 1f);
-        public T InArray<T>(T[] array) => array.Exists() ? array[BetweenInt(0, array.Length)] : default;
-        public T InList<T>(List<T> list) => list.Exists() ? list[BetweenInt(0, list.Count)] : default;
     }
 }

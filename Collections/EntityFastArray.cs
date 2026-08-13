@@ -2,16 +2,32 @@ namespace IceFebruary.Collections
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// The high-performance collection for efficiently storing <see cref="IBaseEntity"/> types.
+    /// Automatically recycles slots of deleted entities and doubles its capacity on overflow.
+    /// </summary>
     public sealed class EntityFastArray<T> where T : class, IBaseEntity
     {
         private readonly Stack<int> _freeIndexes = new();
         private T[] _entities;
+
+        /// <summary>
+        /// Raw array containing all registered entities.
+        /// </summary>
         public T[] Entities
         {
             get => _entities;
             private set => _entities = value;
         }
+
+        /// <summary>
+        /// Current size of the array.
+        /// </summary>
         public int Length { get; private set; }
+
+        /// <summary>
+        /// Creates a new instance of the collection with a specified initial size.
+        /// </summary>
         public EntityFastArray(int startLength)
         {
             Length = startLength.ClampForArray();
@@ -21,9 +37,14 @@ namespace IceFebruary.Collections
             for (int index = 0; index < Length; index++)
                 _freeIndexes.Push(index);
         }
-        public void Register(T obj)
+
+        /// <summary>
+        /// Registers a live entity in array.
+        /// Triggers self-cleaning or array resizing if full.
+        /// </summary>
+        public void Register(T entity)
         {
-            if (!obj.Exists())
+            if (!entity.Exists())
                 return;
 
             if (_freeIndexes.Count == 0)
@@ -44,7 +65,7 @@ namespace IceFebruary.Collections
                 Length = doubledLength;
             }
 
-            Entities[_freeIndexes.Pop()] = obj;
+            Entities[_freeIndexes.Pop()] = entity;
         }
     }
 }
