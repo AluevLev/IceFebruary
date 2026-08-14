@@ -3,7 +3,7 @@ namespace IceFebruary.Space.Vector2Provider
     using IceFebruary.Proxy;
 
     /// <summary>
-    /// Base interface for dynamic vector evaluation strategies. 
+    /// Base interface for dynamic vector evaluation strategies.
     /// Allows computing or retrieving spatial coordinates on demand.
     /// </summary>
     [InterfaceProxy]

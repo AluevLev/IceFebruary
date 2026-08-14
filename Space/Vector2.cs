@@ -146,7 +146,8 @@ namespace IceFebruary.Space
 
 
         /// <summary>
-        /// Dot product of two vectors. Used to determine angles or projections.
+        /// Dot product of two vectors.
+        /// Used to determine angles or projections.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector2 a, Vector2 b) => a.X * b.X + a.Y * b.Y;

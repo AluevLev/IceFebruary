@@ -1,7 +1,8 @@
 namespace IceFebruary.Time
 {
     /// <summary>
-    /// Core time management interface. Controls execution of regular and fixed update frames.
+    /// Core time management interface.
+    /// Controls execution of regular and fixed update frames.
     /// </summary>
     public interface ITime : IBaseEntity
     {

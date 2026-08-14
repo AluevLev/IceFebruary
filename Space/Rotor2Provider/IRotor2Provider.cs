@@ -10,7 +10,7 @@ namespace IceFebruary.Space.Rotor2Provider
     public interface IRotor2Provider
     {
         /// <summary>
-        /// 
+        /// Attempts to calculate or retrieve current rotor.
         /// </summary>
         bool TryGet(out Rotor2 value);
     }
