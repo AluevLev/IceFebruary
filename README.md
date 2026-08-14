@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="IceFebruaryLogo.png" alt="IceFebruary Logo" width="500">
+</p>
+
 ## 🧊 IceFebruary
 
 IceFebruary is a standalone, lightweight, and high-performance architectural framework written in pure C# (POCO). It is meticulously engineered around Clean Architecture principles, completely separating business logic, deterministic mathematics, spatial evaluations, and system states from any backend simulation platform or graphic rendering layer.
