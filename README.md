@@ -1,8 +1,11 @@
-## 🧊 IceFebruary (POCO Core)
+## 🧊 IceFebruary
+
 IceFebruary is a standalone, lightweight, and high-performance architectural framework written in pure C# (POCO). It is meticulously engineered around Clean Architecture principles, completely separating business logic, deterministic mathematics, spatial evaluations, and system states from any backend simulation platform or graphic rendering layer.
 The framework is completely self-contained with zero external package overhead. It provides an elegant, platform-agnostic blueprint that utilizes an advanced component-based architecture, allowing it to remain highly flexible. While its structures handle common layout, physics-like queries, and animation pipelines, it is designed to operate in any standard C# runtime—from headless authoritative game servers to modern standalone desktop applications.
 Integration with external visual visualization tools or specific processing environments is achieved through a dedicated bridge layer via decoupled automatic proxy generation.
+
 ------------------------------
+
 ## ✨ Key Strengths & Philosophy
 
 * Absolute Isolation: By containing logic strictly within standard C#, the codebase becomes inherently unit-testable, secure from external API updates, and ready for clean multi-platform distribution.
@@ -11,7 +14,9 @@ Integration with external visual visualization tools or specific processing envi
 * Spatial Decoupling via Strategy Pattern: Abstract providers wrap coordinates and rotational properties, enabling real-time logic systems to query or track dynamic targets without knowing their underlying data sources.
 
 ------------------------------
+
 ## 🛠 Architectural Modules## 1. Entity Lifecycle
+
 Instead of binding logic execution to heavy, framework-dependent controller objects, IceFebruary manages objects through isolated abstractions:
 
 * IBaseEntity / BaseEntity: Controls the fundamental state machine of every logistically active object via Enabled and Destroyed flags, backed by a deterministic Destroy() cleanup method.
@@ -19,11 +24,13 @@ Instead of binding logic execution to heavy, framework-dependent controller obje
 * Trigger: A dedicated state flag that stays active for exactly one physical tick step (IFixedFrame), automatically resetting its charge on the subsequent cycle.
 
 ## 2. High-Performance Containers (IceFebruary.Collections)
+
 A dedicated collection structure is included to circumvent frequent runtime array allocations:
 
 * EntityFastArray<T>: Maintains an internal stack of available memory slots (_freeIndexes). When an entity is destroyed, its position is immediately recycled. If the container reaches capacity, it performs a lazy self-cleaning swipe. If it remains full, it expands its layout size by a fast bitwise left-shift operation (Length << 1), preventing frequent memory fragmentation.
 
 ## 3. Spatial Algebra & Trigonometry (IceFebruary.Space)
+
 The framework hosts its own custom, engine-independent 2D mathematical pipeline:
 
 * Vector2: An immutable two-dimensional structural representation. It features orientation constants (TopRight, BottomLeft, etc.) and non-crashing normalization logic (defaults to Right if length falls below epsilon). Its hashing algorithm utilizes inverse epsilon multipliers to prevent floating-point inaccuracy artifacts.
@@ -31,6 +38,7 @@ The framework hosts its own custom, engine-independent 2D mathematical pipeline:
 * ITargetPossessing<T>: A standardized interface for any autonomous runtime routine capable of locking onto or following a specific target provider strategy.
 
 ## 4. Evaluation Providers (IceFebruary.Space.*Provider)
+
 Spatial evaluations use a polymorphic Strategy Pattern to keep layout coordinates fluid and unbound:
 
 * IVector2Provider / IRotor2Provider: Contracts designed to evaluate or calculate positions and rotors on demand via a standard TryGet method. Extensions provide a uniform TryGetSafety layout check to smoothly fallback to default values on missing dependencies.
@@ -67,7 +75,9 @@ Spatial evaluations use a polymorphic Strategy Pattern to keep layout coordinate
 * AnimatorField<T> & AnimatorTrigger: Wrappers that encapsulate state variables safely. They handle null checking routines internally: if the main animator object is destroyed during a tick, the fields handle the cleanup automatically and return a predictable default value instead of causing runtime exceptions.
 
 ------------------------------
+
 ## 🧩 The Compiler Code Generator Pipeline (IceFebruary.Proxy)
+
 The communication layer between this pure logic repository and specialized external development software relies on a series of semantic metadata markers found under the IceFebruary.Proxy namespace. This layer allows a custom code generator tool or an external visual inspector to process the architecture from the outside:
 
 * GeneratorAttribute: The foundational base marker class for all automated mapping commands.
@@ -76,13 +86,15 @@ The communication layer between this pure logic repository and specialized exter
 * [DataObjectProxy]: Tags native structures or data wrappers, signaling the pipeline to securely connect them with binary or text-based external assets.
 
 ------------------------------
+
 ## 🎮 Production & Examples
 
 This architectural framework is actively used in real-world project layouts. To see how these decoupled subsystems, strategies, and code generation attributes work together under production workloads, check out the complete implementation:
 
-* 🚀 **[Link to Your Game Repository]** — A complete production-ready project built entirely on top of the IceFebruary architectural framework.
+* 🚀 **[https://github.com/AluevLev/FightForStick]** — A complete production-ready project built entirely on top of the IceFebruary architectural framework.
 
 ------------------------------
+
 ## ⚙️ Technical Requirements
 
 * Language Specification: C# 9.0 or higher.
