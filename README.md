@@ -19,7 +19,9 @@ Integration with external visual visualization tools or specific processing envi
 
 ------------------------------
 
-## 🛠 Architectural Modules## 1. Entity Lifecycle
+## 🛠 Architectural Modules
+
+## 1. Entity Lifecycle
 
 Instead of binding logic execution to heavy, framework-dependent controller objects, IceFebruary manages objects through isolated abstractions:
 
